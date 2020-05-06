@@ -3,16 +3,12 @@ package com.xhstormr.app
 object Extractor {
 
     private const val COMMAND =
-        """cmd /c iconv -f %s -t UTF-8 -c %s | rg "[\p{han}]{2,}" -a -o"""
+        """cmd /c rg "[\p{han}]{2,}" -a -o %s"""
 
     fun extract(args: ExtractorArgs): Set<String> {
-        val (type, path) = args
+        val path = args.path
 
-        return Runtime.getRuntime()
-            .exec(COMMAND.format(type.encoding, path))
-            .inputStream
-            .bufferedReader()
-            .useLines { it.toSet() }
+        return readProcessOutput(COMMAND.format(path))
     }
 }
 

@@ -8,3 +8,9 @@ fun getSystemResource(name: String): Path =
 
 fun getSystemResourceAsStream(name: String): InputStream =
     ClassLoader.getSystemResourceAsStream(name)!!
+
+fun readProcessOutput(command: String) = Runtime.getRuntime()
+    .exec(command)
+    .inputStream
+    .bufferedReader()
+    .useLines { it.toSet() }

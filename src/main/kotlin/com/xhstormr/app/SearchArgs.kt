@@ -1,5 +1,6 @@
 package com.xhstormr.app
 
-data class ExtractorArgs(
+data class SearchArgs(
+    val pattern: String,
     val path: String
 )
