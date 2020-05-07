@@ -3,7 +3,7 @@ package com.xhstormr.app
 object Searcher {
 
     private const val COMMAND =
-        """cmd /c rg "[0-9A-Z_a-z]*%s[0-9A-Z_a-z]*" -a -o %s"""
+        """cmd /c rg "(?-u:\w*)%s(?-u:\w*)" -a -o %s"""
 
     fun search(args: SearchArgs): Set<String> {
         val (pattern, path) = args
@@ -13,5 +13,8 @@ object Searcher {
 }
 
 /*
+* https://docs.rs/regex/
+* https://perldoc.perl.org/perlre.html
 * https://perldoc.perl.org/perluniprops.html
+* https://www.pcre.org/current/doc/html/pcre2syntax.html
 */
