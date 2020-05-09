@@ -3,7 +3,7 @@ package com.xhstormr.app
 object Searcher {
 
     private const val COMMAND =
-        """cmd /c rg "(?-u:\w*)%s(?-u:\w*)" -a -o %s"""
+        """cmd /c rg "(?-u:[\w.]*)%s(?-u:[\w.]*)" -a -o %s"""
 
     fun search(args: SearchArgs): Set<String> {
         val (pattern, path) = args
