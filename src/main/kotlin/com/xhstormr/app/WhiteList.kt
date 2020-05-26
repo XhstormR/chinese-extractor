@@ -11,4 +11,9 @@ object WhiteList {
         .bufferedReader()
         .use { it.readText() }
         .toCharArray()
+
+    val cet = getSystemResourceAsStream("cet.txt")
+        .bufferedReader()
+        .readLines()
+        .toSet()
 }
