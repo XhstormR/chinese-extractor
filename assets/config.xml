@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch4jConfig>
     <headerType>console</headerType>
-    <jar>../build/libs/chinese-extractor-1.0-SNAPSHOT-min.jar</jar>
-    <outfile>../build/bin/chinese-extractor.exe</outfile>
+    <jar>../build/libs/text-extractor-1.0-SNAPSHOT-min.jar</jar>
+    <outfile>../build/bin/text-extractor.exe</outfile>
     <icon>icon.ico</icon>
     <chdir>.</chdir>
-    <errTitle>chinese-extractor</errTitle>
+    <errTitle>text-extractor</errTitle>
     <versionInfo>
         <fileVersion>1.0.0.0</fileVersion>
         <txtFileVersion>1.0.0</txtFileVersion>
         <productVersion>1.0.0.0</productVersion>
         <txtProductVersion>1.0.0</txtProductVersion>
         <companyName>XhstormR</companyName>
-        <copyright>chinese-extractor (C) 2020 XhstormR</copyright>
-        <internalName>chinese-extractor</internalName>
-        <productName>chinese-extractor</productName>
-        <fileDescription>chinese-extractor</fileDescription>
-        <originalFilename>chinese-extractor.exe</originalFilename>
+        <copyright>text-extractor (C) 2020 XhstormR</copyright>
+        <internalName>text-extractor</internalName>
+        <productName>text-extractor</productName>
+        <fileDescription>text-extractor</fileDescription>
+        <originalFilename>text-extractor.exe</originalFilename>
         <language>ENGLISH_US</language>
     </versionInfo>
     <jre>

@@ -1,2 +1,2 @@
-# chinese-extractor
-Chinese Extractor
+# text-extractor
+Text Extractor

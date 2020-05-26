@@ -1,4 +1,4 @@
-rootProject.name = "chinese-extractor"
+rootProject.name = "text-extractor"
 
 pluginManagement {
     repositories {
