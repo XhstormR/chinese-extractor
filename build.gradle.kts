@@ -5,7 +5,7 @@ version = "1.0-SNAPSHOT"
 
 buildscript {
     dependencies {
-        classpath("net.sf.proguard:proguard-gradle:6.2.2")
+        classpath("com.guardsquare:proguard-gradle:7.0.0")
     }
 }
 
@@ -26,6 +26,8 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+
+    implementation("com.github.ajalt:clikt:+")
 }
 
 tasks {
@@ -57,7 +59,7 @@ tasks {
     }
 
     withType<Wrapper> {
-        gradleVersion = "6.3"
+        gradleVersion = "6.5"
         distributionType = Wrapper.DistributionType.ALL
     }
 

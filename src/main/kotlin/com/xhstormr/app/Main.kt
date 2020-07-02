@@ -1,20 +1,30 @@
 package com.xhstormr.app
 
-fun main(args: Array<String>) {
+import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.option
+import com.github.ajalt.clikt.parameters.options.required
+import com.github.ajalt.clikt.parameters.types.enum
 
-    if (args.size != 3) {
-        println("Usage: text-extractor <type> <path> <lang>")
-        return
+class App : CliktCommand(printHelpOnEmptyArgs = true) {
+
+    private val path by option().required()
+
+    private val type by option().enum<ConverterType>().required()
+
+    private val lang by option().enum<ExtractorLang>().required()
+
+    override fun run() {
+        val txtPath = createTempFile()
+            .apply { deleteOnExit() }
+            .path
+
+        val converterArgs = ConverterArgs(type, path, txtPath)
+        Converter.convert(converterArgs)
+
+        val extractorArgs = ExtractorArgs(lang, txtPath)
+        Extractor.extract(extractorArgs)
+            .forEach { println(it) }
     }
-
-    val txtPath = createTempFile()
-        .apply { deleteOnExit() }
-        .path
-
-    val converterArgs = ConverterArgs(ConverterType.valueOf(args[0].toUpperCase()), args[1], txtPath)
-    Converter.convert(converterArgs)
-
-    val extractorArgs = ExtractorArgs(ExtractorLang.valueOf(args[2].toUpperCase()), txtPath)
-    Extractor.extract(extractorArgs)
-        .forEach { println(it) }
 }
+
+fun main(args: Array<String>) = App().main(args)
