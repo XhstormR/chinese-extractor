@@ -9,19 +9,12 @@ class App : CliktCommand(printHelpOnEmptyArgs = true) {
 
     private val path by option().required()
 
-    private val type by option().enum<ConverterType>().required()
+    private val encoding by option().enum<Encoding>().required()
 
     private val lang by option().enum<ExtractorLang>().required()
 
     override fun run() {
-        val txtPath = createTempFile()
-            .apply { deleteOnExit() }
-            .path
-
-        val converterArgs = ConverterArgs(type, path, txtPath)
-        Converter.convert(converterArgs)
-
-        val extractorArgs = ExtractorArgs(lang, txtPath)
+        val extractorArgs = ExtractorArgs(lang, path, encoding)
         Extractor.extract(extractorArgs)
             .forEach { println(it) }
     }
