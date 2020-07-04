@@ -1,3 +1,5 @@
+-include moshi.pro
+
 -optimizationpasses 5
 
 -adaptclassstrings
@@ -11,6 +13,8 @@
 
 -repackageclasses com.xhstormr.app
 
+-keepattributes *Annotation*
+
 -keepclassmembers enum * {
     public static **[] values();
 }
@@ -18,3 +22,5 @@
 -keepclasseswithmembers class * {
     public static void main(java.lang.String[]);
 }
+
+-dontwarn org.codehaus.**

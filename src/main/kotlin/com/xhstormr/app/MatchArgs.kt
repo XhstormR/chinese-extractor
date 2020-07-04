@@ -2,8 +2,7 @@ package com.xhstormr.app
 
 import java.nio.charset.Charset
 
-data class SearchArgs(
+data class MatchArgs(
     val path: String,
-    val pattern: String,
-    val charset: Charset
+    val data: Map<Charset, List<String>>
 )

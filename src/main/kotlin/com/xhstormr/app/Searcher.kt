@@ -6,9 +6,9 @@ object Searcher {
         """cmd /c rg "(?-u:[\w.]*)%s(?-u:[\w.]*)" -a -o --encoding %s %s"""
 
     fun search(args: SearchArgs): Set<String> {
-        val (pattern, encoding, path) = args
+        val (path, pattern, charset) = args
 
-        return readProcessOutput(COMMAND.format(pattern, encoding, path))
+        return readProcessOutput(COMMAND.format(pattern, charset, path))
     }
 }
 

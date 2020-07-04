@@ -13,6 +13,7 @@ plugins {
     idea
     application
     kotlin("jvm") version "1.3.72"
+    kotlin("kapt") version "1.3.72"
     id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
 }
 
@@ -28,6 +29,11 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
     implementation("com.github.ajalt:clikt:+")
+
+    implementation("com.squareup.moshi:moshi:+")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:+")
+
+    implementation("org.json:json:+")
 }
 
 tasks {

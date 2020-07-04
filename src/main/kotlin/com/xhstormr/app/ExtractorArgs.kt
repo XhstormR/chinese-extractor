@@ -1,7 +1,6 @@
 package com.xhstormr.app
 
 data class ExtractorArgs(
-    val lang: ExtractorLang,
     val path: String,
-    val encoding: Encoding
+    val lang: ExtractorLang
 )
