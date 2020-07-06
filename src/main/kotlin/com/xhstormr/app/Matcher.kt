@@ -36,7 +36,8 @@ object Matcher {
                 .map { it.data }
                 .flatMap { data ->
                     data.submatches.map {
-                        val text = it.match.text ?: String(decoder.decode(it.match.bytes), charset)
+                        val text = it.match.text?.toByteArray(Charsets.UTF_8)?.toString(charset)
+                            ?: decoder.decode(it.match.bytes).toString(charset)
                         val offset = data.absoluteOffset + it.start
                         val length = it.end - it.start
                         Sample(text, offset, length)
