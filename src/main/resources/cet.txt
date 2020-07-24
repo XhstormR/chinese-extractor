@@ -7981,5 +7981,3 @@ zoo
 zoological
 zoology
 zoom
-CVE
-CNVD

@@ -10,7 +10,12 @@ object ChineseExtractor {
             // 只包含常用汉字
             .filter { str -> str.all { WhiteList.characters.contains(it) } }
             // 至少包含一个词组
-            .filter { str -> WhiteList.words.any { str.contains(it) } }
+            .filter { str ->
+                WhiteList.words.any { str.contains(it) } ||
+                    WhiteList.website.any { str.contains(it, true) } ||
+                    WhiteList.malware.any { str.contains(it, true) } ||
+                    WhiteList.antivirus.any { str.contains(it, true) }
+            }
             .map { SearchArgs(args.path, it, charset) }
             .flatMap { Searcher.search(it) }
     }

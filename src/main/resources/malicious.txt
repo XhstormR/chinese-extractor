@@ -1,0 +1,8 @@
+id
+ifconfig
+ipconfig
+netstat
+ps
+tasklist
+w
+whoami

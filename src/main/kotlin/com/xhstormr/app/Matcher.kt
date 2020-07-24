@@ -25,6 +25,8 @@ object Matcher {
 
         return data.mapValues { (charset, patterns) ->
             val rules = patterns
+                // longest match first
+                .sortedByDescending { it.length }
                 .map { it.toHexString(charset) }
                 .map { RULE_TEMPLATE.format(it) }
 
