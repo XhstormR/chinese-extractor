@@ -12,9 +12,10 @@ buildscript {
 plugins {
     idea
     application
-    kotlin("jvm") version "1.3.72"
-    kotlin("kapt") version "1.3.72"
-    id("org.jlleitschuh.gradle.ktlint") version "9.2.1"
+    val kotlinVersion = "1.3.72"
+    kotlin("jvm") version kotlinVersion
+    kotlin("kapt") version kotlinVersion
+    id("org.jlleitschuh.gradle.ktlint") version "9.3.0"
 }
 
 application {

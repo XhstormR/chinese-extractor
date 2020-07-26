@@ -11,8 +11,9 @@ Clam
 Comodo
 CryptoExpert
 Cyberscrub professional
-ESET NOD32
+ESET
 Eset Smart Security
+F-Secure
 Folder Guard
 FreeFixer
 Hitman
@@ -23,8 +24,11 @@ KeyDefender
 KeyScrambler
 LaneCat
 Loki
+MSE
 Malware Defender
+McAfee
 Microsoft Security
+NOD32
 Norton
 PC-cillin
 Password Corral
@@ -39,9 +43,10 @@ Safe3
 Sandboxie
 Sophos
 SpyShelter
+Symantec
 SysReveal
 TimeOn
-Trend Micro RootkitBuster
+Trend
 TrueCrypt
 WinMend Folder Hidden
 WinPatrol

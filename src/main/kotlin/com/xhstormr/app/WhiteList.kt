@@ -31,6 +31,7 @@ object WhiteList {
     val malicious = getSystemResourceAsStream("malicious.txt")
         .bufferedReader()
         .readLines()
+        .filter { it.length > 2 }
         .toSet()
 
     val antivirus = getSystemResourceAsStream("antivirus.txt")

@@ -1,9 +1,9 @@
 package com.xhstormr.app
 
+import org.json.JSONObject
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.util.Base64
-import org.json.JSONObject
 
 object Matcher {
 
