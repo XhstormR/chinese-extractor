@@ -4,7 +4,6 @@
 
 -adaptclassstrings
 -adaptresourcefilenames
--adaptresourcefilecontents
 -allowaccessmodification
 
 -obfuscationdictionary proguard-dict.txt
