@@ -1,14 +1,18 @@
 package com.xhstormr.app
 
+import com.github.promeg.pinyinhelper.Pinyin
+import kotlin.streams.toList
+
 object ChineseExtractor {
 
     private const val COMMAND =
-        """cmd /c rg "[\p{han}]{2,}" -a -o --encoding %s %s"""
+        """cmd /c rg "(?-u:[\w.]*)[\p{han}]{2,}(?-u:[\w.]*)" -a -o --encoding %s %s"""
 
     fun extract(args: ExtractorArgs) = args.lang.charsets.associateWith { charset ->
         readProcessOutput(COMMAND.format(charset, args.path))
+            .parallelStream()
             // 只包含常用汉字
-            .filter { str -> str.all { WhiteList.characters.contains(it) } }
+            .filter { str -> str.filter { Pinyin.isChinese(it) }.all { WhiteList.characters.contains(it) } }
             // 至少包含一个词组
             .filter { str ->
                 WhiteList.words.any { str.contains(it) } ||
@@ -16,11 +20,17 @@ object ChineseExtractor {
                     WhiteList.malware.any { str.contains(it, true) } ||
                     WhiteList.antivirus.any { str.contains(it, true) }
             }
-            .map { SearchArgs(args.path, it, charset) }
-            .flatMap { Searcher.search(it) }
+            .toList()
     }
 }
 
 /*
 * iconv -f GBK -t UTF-8 -c 123.dmp | rg "[\p{han}]{2,}" -a -o | busybox sort -u
+*/
+
+/*
+* https://docs.rs/regex/
+* https://perldoc.perl.org/perlre.html
+* https://perldoc.perl.org/perluniprops.html
+* https://www.pcre.org/current/doc/html/pcre2syntax.html
 */

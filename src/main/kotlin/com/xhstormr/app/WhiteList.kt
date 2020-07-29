@@ -23,6 +23,12 @@ object WhiteList {
         .filter { it.length > 2 }
         .toSet()
 
+    val pinyin_word = getSystemResourceAsStream("pinyin_word.txt")
+        .bufferedReader()
+        .readLines()
+        .filter { it.length > 4 }
+        .toSet()
+
     val vul_number = getSystemResourceAsStream("vul_number.txt")
         .bufferedReader()
         .readLines()

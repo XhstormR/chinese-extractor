@@ -35,6 +35,10 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:+")
 
     implementation("org.json:json:+")
+
+    implementation("com.github.promeg:tinypinyin:+")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:+")
 }
 
 tasks {
