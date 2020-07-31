@@ -6,7 +6,7 @@ import kotlin.streams.toList
 object ChineseExtractor {
 
     private const val COMMAND =
-        """cmd /c rg "(?-u:[\w.]*)[\p{han}]{2,}(?-u:[\w.]*)" -a -o --encoding %s %s"""
+        """cmd /c rg "([\w.，。；（） ]*)[\p{han}]{2,}([\w.，。；（） ]*)" -a -o --encoding %s %s"""
 
     fun extract(args: ExtractorArgs) = args.lang.charsets.associateWith { charset ->
         readProcessOutput(COMMAND.format(charset, args.path))
