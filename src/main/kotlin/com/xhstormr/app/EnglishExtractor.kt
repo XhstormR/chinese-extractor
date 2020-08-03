@@ -5,7 +5,7 @@ import kotlin.streams.toList
 object EnglishExtractor {
 
     private const val COMMAND =
-        """cmd /c rg "(?-u:[\w,.;'/\(\)\-\"\\ ]){3,}" -a -o --encoding %s %s"""
+        """cmd /c rg "(?-u:[\w,.?:;'/\(\)\-\"\\ ]){3,}" -a -o --encoding %s %s"""
 
     fun extract(args: ExtractorArgs) = args.lang.charsets.associateWith { charset ->
         readProcessOutput(COMMAND.format(charset, args.path))
