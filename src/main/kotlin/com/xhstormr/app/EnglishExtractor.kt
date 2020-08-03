@@ -7,7 +7,7 @@ object EnglishExtractor {
     private const val COMMAND =
         """cmd /c rg "(?-u:[\w,.?:;'/\(\)\-\"\\ ]){3,}" -a -o --encoding %s %s"""
 
-    fun extract(args: ExtractorArgs) = args.lang.charsets.associateWith { charset ->
+    fun extract(args: ExtractorArgs) = args.type.charsets.associateWith { charset ->
         readProcessOutput(COMMAND.format(charset, args.path))
             .parallelStream()
             // 至少包含一个词组

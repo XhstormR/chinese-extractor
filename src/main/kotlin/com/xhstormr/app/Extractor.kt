@@ -2,9 +2,9 @@ package com.xhstormr.app
 
 object Extractor {
 
-    fun extract(args: ExtractorArgs) = when (args.lang) {
-        ExtractorLang.ZH -> ChineseExtractor.extract(args)
-        ExtractorLang.EN -> EnglishExtractor.extract(args)
-        ExtractorLang.IP -> IPAddressExtractor.extract(args)
+    fun extract(args: ExtractorArgs) = when (args.type) {
+        ExtractorType.ZH -> ChineseExtractor.extract(args)
+        ExtractorType.EN -> EnglishExtractor.extract(args)
+        ExtractorType.IP -> IPAddressExtractor.extract(args)
     }
 }

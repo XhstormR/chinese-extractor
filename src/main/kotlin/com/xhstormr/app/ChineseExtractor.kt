@@ -8,7 +8,7 @@ object ChineseExtractor {
     private const val COMMAND =
         """cmd /c rg "([\w.，、。？：；（） ]*)[\p{han}]{2,}([\w.，、。？：；（） ]*)" -a -o --encoding %s %s"""
 
-    fun extract(args: ExtractorArgs) = args.lang.charsets.associateWith { charset ->
+    fun extract(args: ExtractorArgs) = args.type.charsets.associateWith { charset ->
         readProcessOutput(COMMAND.format(charset, args.path))
             .parallelStream()
             // 只包含常用汉字
