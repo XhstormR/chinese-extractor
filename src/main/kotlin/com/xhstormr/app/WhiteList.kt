@@ -54,4 +54,8 @@ object WhiteList {
         .bufferedReader()
         .readLines()
         .toSet()
+
+    val domain = getSystemResourceAsStream("domain.txt")
+        .bufferedReader()
+        .use { it.readText() }
 }
