@@ -1,0 +1,42 @@
+server:
+  port: ${port:8080}
+  forward-headers-strategy: NATIVE
+  servlet:
+    context-path: /api
+    encoding:
+      force: true
+    session:
+      cookie:
+        path: /
+
+spring:
+  profiles:
+    include:
+      - extractor
+  application:
+    name: web
+  main:
+    banner-mode: "OFF"
+  devtools:
+    livereload:
+      enabled: false
+  mvc:
+    locale: en_US
+    locale-resolver: FIXED
+  hateoas:
+    use-hal-as-default-json-media-type: false
+  jackson:
+    serialization:
+      INDENT_OUTPUT: false
+      WRITE_DATES_AS_TIMESTAMPS: true
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 55MB
+
+logging:
+  file:
+    name: /app/data/log/prod.log
+  level:
+    root: warn
+    com.xhstormr.web: info
