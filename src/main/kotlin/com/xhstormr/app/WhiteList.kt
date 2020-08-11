@@ -2,14 +2,32 @@ package com.xhstormr.app
 
 object WhiteList {
 
-    val characters = getSystemResourceAsStream("characters.txt")
+    val characters_s = getSystemResourceAsStream("characters_s.txt")
         .bufferedReader()
         .use { it.readText() }
         .toCharArray()
 
-    val words = getSystemResourceAsStream("words.txt")
+    val characters_t = getSystemResourceAsStream("characters_t.txt")
+        .bufferedReader()
+        .use { it.readText() }
+        .toCharArray()
+
+    val characters = characters_s.toMutableSet()
+        .apply { addAll(characters_t.asIterable()) }
+        .toCharArray()
+
+    val words_s = getSystemResourceAsStream("words_s.txt")
         .bufferedReader()
         .readLines()
+        .toSet()
+
+    val words_t = getSystemResourceAsStream("words_t.txt")
+        .bufferedReader()
+        .readLines()
+        .toSet()
+
+    val words = words_s.toMutableSet()
+        .apply { addAll(words_t.asIterable()) }
         .toSet()
 
     val cet = getSystemResourceAsStream("cet.txt")
