@@ -15,8 +15,8 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
     override fun run() {
         val parameterizedType =
-            Types.newParameterizedType(clazz<Map<*, *>>(), clazz<Charset>(), clazz<List<*>>(), clazz<Sample>())
-        val jsonAdapter = moshi.adapter<Map<Charset, List<Sample>>>(parameterizedType)
+            Types.newParameterizedType(clazz<Map<*, *>>(), clazz<Charset>(), clazz<Map<*, *>>(), clazz<TextType>(), clazz<List<*>>(), clazz<Sample>())
+        val jsonAdapter = moshi.adapter<Map<Charset, Map<TextType, List<Sample>>>>(parameterizedType)
 
         Extractor.extract(ExtractorArgs(path, type))
             .let { Matcher.match(MatchArgs(path, it)) }

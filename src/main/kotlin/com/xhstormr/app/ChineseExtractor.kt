@@ -1,7 +1,7 @@
 package com.xhstormr.app
 
 import com.github.promeg.pinyinhelper.Pinyin
-import kotlin.streams.toList
+import java.util.stream.Collectors
 
 object ChineseExtractor {
 
@@ -14,13 +14,18 @@ object ChineseExtractor {
             // 只包含常用汉字
             .filter { str -> str.filter { Pinyin.isChinese(it) }.all { WhiteList.characters.contains(it) } }
             // 至少包含一个词组
-            .filter { str ->
-                WhiteList.words.any { str.contains(it) } ||
-                    WhiteList.website.any { str.contains(it, true) } ||
-                    WhiteList.malware.any { str.contains(it, true) } ||
-                    WhiteList.antivirus.any { str.contains(it, true) }
-            }
-            .toList()
+            .collect(
+                Collectors.groupingByConcurrent<String, TextType> { str ->
+                    when {
+                        WhiteList.words.any { str.contains(it, true) } -> TextType.Words
+                        WhiteList.website.any { str.contains(it, true) } -> TextType.Website
+                        WhiteList.malware.any { str.contains(it, true) } -> TextType.Malware
+                        WhiteList.antivirus.any { str.contains(it, true) } -> TextType.Antivirus
+                        else -> TextType.None
+                    }
+                }
+            )
+            .apply { remove(TextType.None) }
     }
 }
 

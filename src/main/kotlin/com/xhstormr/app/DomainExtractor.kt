@@ -11,5 +11,6 @@ object DomainExtractor {
 
     fun extract(args: ExtractorArgs) = args.type.charsets.associateWith { charset ->
         readProcessOutput(COMMAND.format(rulesFile, charset, args.path))
+            .run { mapOf(TextType.Domain to this) }
     }
 }

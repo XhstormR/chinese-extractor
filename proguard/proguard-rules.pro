@@ -23,3 +23,6 @@
 }
 
 -dontwarn org.codehaus.**
+
+-printusage ../build/usage.txt
+-printmapping ../build/mapping.txt
