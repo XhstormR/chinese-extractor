@@ -38,6 +38,8 @@ dependencies {
 
     implementation("com.github.promeg:tinypinyin:+")
 
+    implementation("com.hankcs:aho-corasick-double-array-trie:+")
+
     testImplementation("org.junit.jupiter:junit-jupiter:+")
 }
 

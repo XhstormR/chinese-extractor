@@ -17,7 +17,7 @@ class Tests {
 
     @Test
     fun word2pinyin() {
-        WhiteList.words
+        WhiteList.words_s
             .map { Pinyin.toPinyin(it, "") }
             .map { it.toLowerCase() }
             .toSet()

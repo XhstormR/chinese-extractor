@@ -17,10 +17,10 @@ object ChineseExtractor {
             .collect(
                 Collectors.groupingByConcurrent<String, TextType> { str ->
                     when {
-                        WhiteList.words.any { str.contains(it, true) } -> TextType.Words
-                        WhiteList.website.any { str.contains(it, true) } -> TextType.Website
-                        WhiteList.malware.any { str.contains(it, true) } -> TextType.Malware
-                        WhiteList.antivirus.any { str.contains(it, true) } -> TextType.Antivirus
+                        WhiteList.words_trie.matches(str) -> TextType.Words
+                        WhiteList.website_trie.matches(str) -> TextType.Website
+                        WhiteList.malware_trie.matches(str) -> TextType.Malware
+                        WhiteList.antivirus_trie.matches(str) -> TextType.Antivirus
                         else -> TextType.None
                     }
                 }
