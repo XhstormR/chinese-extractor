@@ -15,7 +15,7 @@ object ChineseExtractor {
             .filter { str -> str.filter { Pinyin.isChinese(it) }.all { WhiteList.characters.contains(it) } }
             // 至少包含一个词组
             .collect(
-                Collectors.groupingByConcurrent<String, TextType> { str ->
+                Collectors.groupingByConcurrent { str ->
                     when {
                         WhiteList.words_trie.matches(str) -> TextType.Words
                         WhiteList.website_trie.matches(str) -> TextType.Website

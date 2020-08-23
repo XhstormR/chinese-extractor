@@ -12,7 +12,7 @@ object EnglishExtractor {
             .parallelStream()
             // 至少包含一个词组
             .collect(
-                Collectors.groupingByConcurrent<String, TextType> { str ->
+                Collectors.groupingByConcurrent { str ->
                     when {
                         WhiteList.cet_trie.matches(str) -> TextType.CET
                         WhiteList.website_trie.matches(str) -> TextType.Website

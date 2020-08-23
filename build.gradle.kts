@@ -12,7 +12,7 @@ buildscript {
 plugins {
     idea
     application
-    val kotlinVersion = "1.3.72"
+    val kotlinVersion = "1.4.0"
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     id("org.jlleitschuh.gradle.ktlint") version "9.3.0"
@@ -72,7 +72,7 @@ tasks {
     }
 
     withType<Wrapper> {
-        gradleVersion = "6.5"
+        gradleVersion = "6.6"
         distributionType = Wrapper.DistributionType.ALL
     }
 
