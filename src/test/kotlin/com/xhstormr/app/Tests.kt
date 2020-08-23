@@ -18,7 +18,7 @@ class Tests {
     @Test
     fun word2pinyin() {
         WhiteList.words_s
-            .map { Pinyin.toPinyin(it, "") }
+            .map { Pinyin.toPinyin(it, " ") }
             .map { it.toLowerCase() }
             .toSet()
             .let { Files.write(Path.of("pinyin_word.txt"), it) }

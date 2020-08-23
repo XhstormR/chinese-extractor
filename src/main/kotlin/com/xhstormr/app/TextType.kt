@@ -6,10 +6,13 @@ import com.squareup.moshi.JsonClass
 enum class TextType {
     Antivirus,
     CET,
+    Date,
     Domain,
+    Local,
     Malicious,
     Malware,
     PinyinWord,
+    Software,
     VulNumber,
     Website,
     Words,

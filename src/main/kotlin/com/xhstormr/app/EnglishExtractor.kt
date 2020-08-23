@@ -15,8 +15,10 @@ object EnglishExtractor {
                 Collectors.groupingByConcurrent { str ->
                     when {
                         WhiteList.cet_trie.matches(str) -> TextType.CET
+                        WhiteList.local_trie.matches(str) -> TextType.Local
                         WhiteList.website_trie.matches(str) -> TextType.Website
                         WhiteList.malware_trie.matches(str) -> TextType.Malware
+                        WhiteList.software_trie.matches(str) -> TextType.Software
                         WhiteList.malicious_trie.matches(str) -> TextType.Malicious
                         WhiteList.antivirus_trie.matches(str) -> TextType.Antivirus
                         WhiteList.vul_number_trie.matches(str) -> TextType.VulNumber

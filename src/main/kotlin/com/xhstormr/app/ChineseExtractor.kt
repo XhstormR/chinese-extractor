@@ -17,9 +17,11 @@ object ChineseExtractor {
             .collect(
                 Collectors.groupingByConcurrent { str ->
                     when {
+                        WhiteList.local_trie.matches(str) -> TextType.Local
                         WhiteList.words_trie.matches(str) -> TextType.Words
                         WhiteList.website_trie.matches(str) -> TextType.Website
                         WhiteList.malware_trie.matches(str) -> TextType.Malware
+                        WhiteList.software_trie.matches(str) -> TextType.Software
                         WhiteList.antivirus_trie.matches(str) -> TextType.Antivirus
                         else -> TextType.None
                     }

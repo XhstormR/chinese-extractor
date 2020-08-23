@@ -91,7 +91,25 @@ object WhiteList {
         .associateBy { it }
         .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
 
+    val local_trie = getSystemResourceAsStream("local.txt")
+        .bufferedReader()
+        .readLines()
+        .toSet()
+        .associateBy { it }
+        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+
+    val software_trie = getSystemResourceAsStream("software.txt")
+        .bufferedReader()
+        .readLines()
+        .toSet()
+        .associateBy { it }
+        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+
     val domain = getSystemResourceAsStream("domain.txt")
+        .bufferedReader()
+        .use { it.readText() }
+
+    val date = getSystemResourceAsStream("date.txt")
         .bufferedReader()
         .use { it.readText() }
 }
