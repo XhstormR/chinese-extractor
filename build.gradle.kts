@@ -36,7 +36,7 @@ dependencies {
 
     implementation("org.json:json:+")
 
-    implementation("com.github.promeg:tinypinyin:+")
+    implementation("com.hankcs:hanlp:+")
 
     implementation("com.hankcs:aho-corasick-double-array-trie:+")
 

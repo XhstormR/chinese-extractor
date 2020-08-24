@@ -1,6 +1,6 @@
 package com.xhstormr.app
 
-import com.github.promeg.pinyinhelper.Pinyin
+import com.hankcs.hanlp.HanLP
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
@@ -18,8 +18,7 @@ class Tests {
     @Test
     fun word2pinyin() {
         WhiteList.words_s
-            .map { Pinyin.toPinyin(it, " ") }
-            .map { it.toLowerCase() }
+            .map { HanLP.convertToPinyinString(it, " ", false) }
             .toSet()
             .let { Files.write(Path.of("pinyin_word.txt"), it) }
     }

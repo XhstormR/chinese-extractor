@@ -1,6 +1,6 @@
 package com.xhstormr.app
 
-import com.github.promeg.pinyinhelper.Pinyin
+import com.hankcs.hanlp.utility.TextUtility
 import java.util.stream.Collectors
 
 object ChineseExtractor {
@@ -12,7 +12,7 @@ object ChineseExtractor {
         readProcessOutput(COMMAND.format(charset, args.path))
             .parallelStream()
             // 只包含常用汉字
-            .filter { str -> str.filter { Pinyin.isChinese(it) }.all { WhiteList.characters.contains(it) } }
+            .filter { str -> str.filter { TextUtility.isChinese(it) }.all { WhiteList.characters.contains(it) } }
             // 至少包含一个词组
             .collect(
                 Collectors.groupingByConcurrent { str ->
