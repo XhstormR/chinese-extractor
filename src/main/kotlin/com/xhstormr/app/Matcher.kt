@@ -27,7 +27,7 @@ object Matcher {
                     .sortedByDescending { it.length }
                     .map { it.toHexString(charset) }
                     .map { RULE_TEMPLATE.format(it) }
-                    .windowed(5000, 5000, true)
+                    .chunked(5000)
                     .parallelStream()
                     .flatMap { rules ->
                         val rulesFile = createTempFile()
