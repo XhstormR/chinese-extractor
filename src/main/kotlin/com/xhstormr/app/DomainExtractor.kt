@@ -14,3 +14,10 @@ object DomainExtractor {
             .run { mapOf(TextType.Domain to this) }
     }
 }
+
+/*
+* https://www.iana.org/domains/root/db
+* https://publicsuffix.org/list/public_suffix_list.dat
+* https://en.m.wikipedia.org/wiki/List_of_Internet_top-level_domains
+* https://github.com/hankcs/HanLP/blob/1.x/src/main/java/com/hankcs/hanlp/tokenizer/URLTokenizer.java
+*/
