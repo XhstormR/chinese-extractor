@@ -37,6 +37,11 @@ class ExtractorController(
     fun extractEnglish(@ApiParam("文件") @RequestPart file: MultipartFile) =
         extractText(file, ExtractorType.EN)
 
+    @ApiOperation("提取日期")
+    @PostMapping("/date")
+    fun extractDate(@ApiParam("文件") @RequestPart file: MultipartFile) =
+        extractText(file, ExtractorType.Date)
+
     @ApiOperation("提取域名")
     @PostMapping("/domain")
     fun extractDomain(@ApiParam("文件") @RequestPart file: MultipartFile) =

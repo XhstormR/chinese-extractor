@@ -6,12 +6,12 @@ version = "1.0-SNAPSHOT"
 plugins {
     idea
     application
-    val kotlinVersion = "1.3.72"
+    val kotlinVersion = "1.4.0"
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "2.3.2.RELEASE"
+    id("org.springframework.boot") version "2.3.3.RELEASE"
     id("org.jlleitschuh.gradle.ktlint") version "9.3.0"
 }
 
@@ -47,7 +47,7 @@ dependencies {
 
 tasks {
     withType<Wrapper> {
-        gradleVersion = "6.5"
+        gradleVersion = "6.6"
         distributionType = Wrapper.DistributionType.ALL
     }
 
