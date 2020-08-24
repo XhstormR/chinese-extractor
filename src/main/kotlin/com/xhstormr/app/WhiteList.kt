@@ -34,76 +34,23 @@ object WhiteList {
         .associateBy { it }
         .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
 
-    val cet_trie = getSystemResourceAsStream("cet.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val cet_trie = buildDictTrie("cet.txt")
 
-    val pinyin = getSystemResourceAsStream("pinyin.txt")
-        .bufferedReader()
-        .readLines()
-        .filter { it.length > 2 }
-        .toSet()
+    val pinyin_word_trie = buildDictTrie("pinyin_word.txt")
 
-    val pinyin_word_trie = getSystemResourceAsStream("pinyin_word.txt")
-        .bufferedReader()
-        .readLines()
-        .filter { it.length > 4 }
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val vul_number_trie = buildDictTrie("vul_number.txt")
 
-    val vul_number_trie = getSystemResourceAsStream("vul_number.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val malicious_trie = buildDictTrie("malicious.txt")
 
-    val malicious_trie = getSystemResourceAsStream("malicious.txt")
-        .bufferedReader()
-        .readLines()
-        .filter { it.length > 2 }
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val antivirus_trie = buildDictTrie("antivirus.txt")
 
-    val antivirus_trie = getSystemResourceAsStream("antivirus.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val malware_trie = buildDictTrie("malware.txt")
 
-    val malware_trie = getSystemResourceAsStream("malware.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val website_trie = buildDictTrie("website.txt")
 
-    val website_trie = getSystemResourceAsStream("website.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val local_trie = buildDictTrie("local.txt")
 
-    val local_trie = getSystemResourceAsStream("local.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
-
-    val software_trie = getSystemResourceAsStream("software.txt")
-        .bufferedReader()
-        .readLines()
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+    val software_trie = buildDictTrie("software.txt")
 
     val domain = getSystemResourceAsStream("domain.txt")
         .bufferedReader()
@@ -112,4 +59,12 @@ object WhiteList {
     val date = getSystemResourceAsStream("date.txt")
         .bufferedReader()
         .use { it.readText() }
+
+    private fun buildDictTrie(name: String) = getSystemResourceAsStream(name)
+        .bufferedReader()
+        .readLines()
+        .toSet()
+        .map { it.toLowerCase() }
+        .associateBy { it }
+        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
 }
