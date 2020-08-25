@@ -17,7 +17,7 @@ class Tests {
 
     @Test
     fun word2pinyin() {
-        WhiteList.words_s
+        Dictionary.words_s
             .map { HanLP.convertToPinyinString(it, " ", false) }
             .toSet()
             .let { Files.write(Path.of("pinyin_word.txt"), it) }

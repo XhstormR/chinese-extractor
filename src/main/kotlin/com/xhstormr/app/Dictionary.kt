@@ -3,7 +3,7 @@ package com.xhstormr.app
 import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie
 import com.hankcs.hanlp.HanLP
 
-object WhiteList {
+object Dictionary {
 
     val domain = getSystemResourceAsStream("domain.txt")
         .bufferedReader()

@@ -33,15 +33,15 @@ enum class Extractor(val charsets: List<Charset>) {
                     Collectors.groupingByConcurrent { str ->
                         with(str.toLowerCase()) {
                             when {
-                                WhiteList.cet_trie.matches(this) -> TextType.CET
-                                WhiteList.local_trie.matches(this) -> TextType.Local
-                                WhiteList.website_trie.matches(this) -> TextType.Website
-                                WhiteList.malware_trie.matches(this) -> TextType.Malware
-                                WhiteList.software_trie.matches(this) -> TextType.Software
-                                WhiteList.malicious_trie.matches(this) -> TextType.Malicious
-                                WhiteList.antivirus_trie.matches(this) -> TextType.Antivirus
-                                WhiteList.vul_number_trie.matches(this) -> TextType.VulNumber
-                                WhiteList.pinyin_word_trie.matches(this) -> TextType.PinyinWord
+                                Dictionary.cet_trie.matches(this) -> TextType.CET
+                                Dictionary.local_trie.matches(this) -> TextType.Local
+                                Dictionary.website_trie.matches(this) -> TextType.Website
+                                Dictionary.malware_trie.matches(this) -> TextType.Malware
+                                Dictionary.software_trie.matches(this) -> TextType.Software
+                                Dictionary.malicious_trie.matches(this) -> TextType.Malicious
+                                Dictionary.antivirus_trie.matches(this) -> TextType.Antivirus
+                                Dictionary.vul_number_trie.matches(this) -> TextType.VulNumber
+                                Dictionary.pinyin_word_trie.matches(this) -> TextType.PinyinWord
                                 else -> TextType.None
                             }
                         }
@@ -60,17 +60,17 @@ enum class Extractor(val charsets: List<Charset>) {
             readProcessOutput(command.format(charset, path))
                 .parallelStream()
                 // 只包含常用汉字
-                .filter { str -> str.filter { TextUtility.isChinese(it) }.all { WhiteList.characters.contains(it) } }
+                .filter { str -> str.filter { TextUtility.isChinese(it) }.all { Dictionary.characters.contains(it) } }
                 // 至少包含一个词组
                 .collect(
                     Collectors.groupingByConcurrent { str ->
                         when {
-                            WhiteList.local_trie.matches(str) -> TextType.Local
-                            WhiteList.words_trie.matches(str) -> TextType.Words
-                            WhiteList.website_trie.matches(str) -> TextType.Website
-                            WhiteList.malware_trie.matches(str) -> TextType.Malware
-                            WhiteList.software_trie.matches(str) -> TextType.Software
-                            WhiteList.antivirus_trie.matches(str) -> TextType.Antivirus
+                            Dictionary.local_trie.matches(str) -> TextType.Local
+                            Dictionary.words_trie.matches(str) -> TextType.Words
+                            Dictionary.website_trie.matches(str) -> TextType.Website
+                            Dictionary.malware_trie.matches(str) -> TextType.Malware
+                            Dictionary.software_trie.matches(str) -> TextType.Software
+                            Dictionary.antivirus_trie.matches(str) -> TextType.Antivirus
                             else -> TextType.None
                         }
                     }
@@ -86,7 +86,7 @@ enum class Extractor(val charsets: List<Charset>) {
 
         private val rulesFile = createTempFile()
             .apply { deleteOnExit() }
-            .apply { writeText(WhiteList.date) }
+            .apply { writeText(Dictionary.date) }
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(command.format(rulesFile, charset, path))
@@ -101,7 +101,7 @@ enum class Extractor(val charsets: List<Charset>) {
 
         private val rulesFile = createTempFile()
             .apply { deleteOnExit() }
-            .apply { writeText(WhiteList.domain) }
+            .apply { writeText(Dictionary.domain) }
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(command.format(rulesFile, charset, path))
