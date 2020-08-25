@@ -27,6 +27,11 @@ class ExtractorController(
     private val objectMapper: ObjectMapper
 ) : BaseController() {
 
+    @ApiOperation("提取所有")
+    @PostMapping("/all")
+    fun extractAll(@ApiParam("文件") @RequestPart file: MultipartFile) =
+        extractText(file, ExtractorType.All)
+
     @ApiOperation("提取中文")
     @PostMapping("/zh")
     fun extractChinese(@ApiParam("文件") @RequestPart file: MultipartFile) =
