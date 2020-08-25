@@ -33,7 +33,6 @@ enum class Extractor(val charsets: List<Charset>) {
                     Collectors.groupingByConcurrent { str ->
                         with(str.toLowerCase()) {
                             when {
-                                Dictionary.cet_trie.matches(this) -> TextType.CET
                                 Dictionary.local_trie.matches(this) -> TextType.Local
                                 Dictionary.website_trie.matches(this) -> TextType.Website
                                 Dictionary.malware_trie.matches(this) -> TextType.Malware
@@ -42,6 +41,7 @@ enum class Extractor(val charsets: List<Charset>) {
                                 Dictionary.antivirus_trie.matches(this) -> TextType.Antivirus
                                 Dictionary.vul_number_trie.matches(this) -> TextType.VulNumber
                                 Dictionary.pinyin_word_trie.matches(this) -> TextType.PinyinWord
+                                Dictionary.cet_trie.matches(this) -> TextType.CET
                                 else -> TextType.None
                             }
                         }
@@ -66,11 +66,11 @@ enum class Extractor(val charsets: List<Charset>) {
                     Collectors.groupingByConcurrent { str ->
                         when {
                             Dictionary.local_trie.matches(str) -> TextType.Local
-                            Dictionary.words_trie.matches(str) -> TextType.Words
                             Dictionary.website_trie.matches(str) -> TextType.Website
                             Dictionary.malware_trie.matches(str) -> TextType.Malware
                             Dictionary.software_trie.matches(str) -> TextType.Software
                             Dictionary.antivirus_trie.matches(str) -> TextType.Antivirus
+                            Dictionary.words_trie.matches(str) -> TextType.Words
                             else -> TextType.None
                         }
                     }

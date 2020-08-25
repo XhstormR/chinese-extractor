@@ -126,6 +126,7 @@ ver
 vssadmin
 w32tm
 wbadmin
+webshell
 wevtutil
 where
 whoami
