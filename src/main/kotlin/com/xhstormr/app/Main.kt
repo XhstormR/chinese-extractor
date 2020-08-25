@@ -11,14 +11,14 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
     private val path by option().required()
 
-    private val type by option().enum<ExtractorType>().required()
+    private val type by option().enum<Extractor>().required()
 
     override fun run() {
         val parameterizedType =
             Types.newParameterizedType(clazz<Map<*, *>>(), clazz<Charset>(), clazz<Map<*, *>>(), clazz<TextType>(), clazz<List<*>>(), clazz<Sample>())
         val jsonAdapter = moshi.adapter<Map<Charset, Map<TextType, List<Sample>>>>(parameterizedType)
 
-        Extractor.extract(ExtractorArgs(path, type))
+        type.extract(path)
             .let { Matcher.match(MatchArgs(path, it)) }
             .let { println(jsonAdapter.toJson(it)) }
     }

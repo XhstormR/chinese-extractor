@@ -34,6 +34,14 @@ object WhiteList {
         .associateBy { it }
         .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
 
+    val domain = getSystemResourceAsStream("domain.txt")
+        .bufferedReader()
+        .use { it.readText() }
+
+    val date = getSystemResourceAsStream("date.txt")
+        .bufferedReader()
+        .use { it.readText() }
+
     val cet_trie = buildDictTrie("cet.txt")
 
     val pinyin_word_trie = buildDictTrie("pinyin_word.txt")
@@ -51,14 +59,6 @@ object WhiteList {
     val local_trie = buildDictTrie("local.txt")
 
     val software_trie = buildDictTrie("software.txt")
-
-    val domain = getSystemResourceAsStream("domain.txt")
-        .bufferedReader()
-        .use { it.readText() }
-
-    val date = getSystemResourceAsStream("date.txt")
-        .bufferedReader()
-        .use { it.readText() }
 
     private fun buildDictTrie(name: String) = getSystemResourceAsStream(name)
         .bufferedReader()
