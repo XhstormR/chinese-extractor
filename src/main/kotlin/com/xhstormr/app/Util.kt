@@ -3,6 +3,7 @@ package com.xhstormr.app
 import com.squareup.moshi.Moshi
 import java.io.InputStream
 import java.nio.charset.Charset
+import java.nio.file.Files
 import java.nio.file.Path
 
 fun getSystemResource(name: String): Path =
@@ -10,6 +11,14 @@ fun getSystemResource(name: String): Path =
 
 fun getSystemResourceAsStream(name: String): InputStream =
     ClassLoader.getSystemResourceAsStream(name)!!
+
+fun writeTempFile(text: String) = createTempFile()
+    .apply { deleteOnExit() }
+    .apply { writeText(text) }
+
+fun writeTempFile(texts: Collection<String>) = createTempFile()
+    .apply { deleteOnExit() }
+    .apply { Files.write(toPath(), texts) }
 
 fun readProcessOutput(command: String) = Runtime.getRuntime()
     .exec(command)

@@ -1,8 +1,6 @@
 package com.xhstormr.app
 
 import org.json.JSONObject
-import java.nio.charset.Charset
-import java.nio.file.Files
 import java.util.Base64
 import kotlin.streams.toList
 
@@ -14,13 +12,12 @@ object Matcher {
     private const val COMMAND =
         """cmd /c rg --json -U -f %s %s"""
 
-    fun match(args: MatchArgs): Map<Charset, Map<TextType, List<Sample>>> {
-        val (path, data) = args
+    private val decoder = Base64.getDecoder()
 
-        val decoder = Base64.getDecoder()
-        val jsonAdapter = moshi.adapter(clazz<Message>())
+    private val jsonAdapter = moshi.adapter(clazz<Message>())
 
-        return data.mapValues { (charset, patterns) ->
+    fun match(args: MatchArgs) = args.data
+        .mapValues { (charset, patterns) ->
             patterns.mapValues { (_, data) ->
                 data
                     // longest match first
@@ -29,14 +26,9 @@ object Matcher {
                     .map { RULE_TEMPLATE.format(it) }
                     .chunked(5000)
                     .parallelStream()
-                    .flatMap { rules ->
-                        val rulesFile = createTempFile()
-                            .apply { deleteOnExit() }
-                            .toPath()
-
-                        Files.write(rulesFile, rules)
-
-                        readProcessOutput(COMMAND.format(rulesFile, path))
+                    .map { writeTempFile(it) }
+                    .flatMap { rulesFile ->
+                        readProcessOutput(COMMAND.format(rulesFile, args.path))
                             .filter { JSONObject(it).getString("type") == "match" }
                             .mapNotNull { jsonAdapter.fromJson(it) }
                             .map { it.data }
@@ -52,5 +44,4 @@ object Matcher {
                     }.toList()
             }
         }
-    }
 }

@@ -86,9 +86,7 @@ enum class Extractor(val charsets: List<Charset>) {
         private val command =
             """cmd /c rg -a -o -f %s --encoding %s %s"""
 
-        private val rulesFile = createTempFile()
-            .apply { deleteOnExit() }
-            .apply { writeText(Dictionary.date) }
+        private val rulesFile = writeTempFile(Dictionary.date)
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(command.format(rulesFile, charset, path))
@@ -101,9 +99,7 @@ enum class Extractor(val charsets: List<Charset>) {
         private val command =
             """cmd /c rg -a -o -f %s --encoding %s %s"""
 
-        private val rulesFile = createTempFile()
-            .apply { deleteOnExit() }
-            .apply { writeText(Dictionary.domain) }
+        private val rulesFile = writeTempFile(Dictionary.domain)
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(command.format(rulesFile, charset, path))

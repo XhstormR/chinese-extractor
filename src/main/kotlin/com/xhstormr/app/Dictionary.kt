@@ -5,19 +5,19 @@ import com.hankcs.hanlp.HanLP
 
 object Dictionary {
 
-    val domain = getSystemResourceAsStream("domain.txt")
+    val domain = getSystemResourceAsStream(TextType.Domain.lexicon)
         .bufferedReader()
         .use { it.readText() }
 
-    val date = getSystemResourceAsStream("date.txt")
+    val date = getSystemResourceAsStream(TextType.Date.lexicon)
         .bufferedReader()
         .use { it.readText() }
 
-    val characters_s = getSystemResourceAsStream("characters_s.txt")
+    val characters_s = getSystemResourceAsStream(TextType.Characters.lexicon)
         .bufferedReader()
         .use { it.readText() }
 
-    val words_s = getSystemResourceAsStream("words_s.txt")
+    val words_s = getSystemResourceAsStream(TextType.Words.lexicon)
         .bufferedReader()
         .readLines()
         .toSet()
@@ -28,35 +28,32 @@ object Dictionary {
 
     val words_trie by lazy { buildDictTrie(words) }
 
-    val cet_trie by lazy { buildDictTrie("cet.txt") }
+    val cet_trie by lazy { buildDictTrie(TextType.CET.lexicon) }
 
-    val pinyin_word_trie by lazy { buildDictTrie("pinyin_word.txt") }
+    val pinyin_word_trie by lazy { buildDictTrie(TextType.PinyinWord.lexicon) }
 
-    val vul_number_trie by lazy { buildDictTrie("vul_number.txt") }
+    val vul_number_trie by lazy { buildDictTrie(TextType.VulNumber.lexicon) }
 
-    val malicious_trie by lazy { buildDictTrie("malicious.txt") }
+    val malicious_trie by lazy { buildDictTrie(TextType.Malicious.lexicon) }
 
-    val antivirus_trie by lazy { buildDictTrie("antivirus.txt") }
+    val antivirus_trie by lazy { buildDictTrie(TextType.Antivirus.lexicon) }
 
-    val malware_trie by lazy { buildDictTrie("malware.txt") }
+    val malware_trie by lazy { buildDictTrie(TextType.Malware.lexicon) }
 
-    val website_trie by lazy { buildDictTrie("website.txt") }
+    val website_trie by lazy { buildDictTrie(TextType.Website.lexicon) }
 
-    val local_trie by lazy { buildDictTrie("local.txt") }
+    val local_trie by lazy { buildDictTrie(TextType.Local.lexicon) }
 
-    val software_trie by lazy { buildDictTrie("software.txt") }
+    val software_trie by lazy { buildDictTrie(TextType.Software.lexicon) }
 
-    val chinglish_words_trie by lazy { buildDictTrie("chinglish_words.txt") }
+    val chinglish_words_trie by lazy { buildDictTrie(TextType.ChinglishWords.lexicon) }
 
-    val chinglish_phrases_trie by lazy { buildDictTrie("chinglish_phrases.txt") }
+    val chinglish_phrases_trie by lazy { buildDictTrie(TextType.ChinglishPhrases.lexicon) }
 
     private fun buildDictTrie(name: String) = getSystemResourceAsStream(name)
         .bufferedReader()
         .readLines()
-        .map { it.toLowerCase() }
-        .toSet()
-        .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+        .run { buildDictTrie(this) }
 
     private fun buildDictTrie(list: Collection<String>) = list
         .map { it.toLowerCase() }
