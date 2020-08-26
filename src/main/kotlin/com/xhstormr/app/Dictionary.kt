@@ -46,6 +46,10 @@ object Dictionary {
 
     val software_trie by lazy { buildDictTrie("software.txt") }
 
+    val chinglish_words_trie by lazy { buildDictTrie("chinglish_words.txt") }
+
+    val chinglish_phrases_trie by lazy { buildDictTrie("chinglish_phrases.txt") }
+
     private fun buildDictTrie(name: String) = getSystemResourceAsStream(name)
         .bufferedReader()
         .readLines()

@@ -41,6 +41,8 @@ enum class Extractor(val charsets: List<Charset>) {
                                 Dictionary.antivirus_trie.matches(this) -> TextType.Antivirus
                                 Dictionary.vul_number_trie.matches(this) -> TextType.VulNumber
                                 Dictionary.pinyin_word_trie.matches(this) -> TextType.PinyinWord
+                                Dictionary.chinglish_words_trie.matches(this) -> TextType.ChinglishWords
+                                Dictionary.chinglish_phrases_trie.matches(this) -> TextType.ChinglishPhrases
                                 Dictionary.cet_trie.matches(this) -> TextType.CET
                                 else -> TextType.None
                             }
