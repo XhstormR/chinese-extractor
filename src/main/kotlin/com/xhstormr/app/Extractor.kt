@@ -23,7 +23,7 @@ enum class Extractor(val charsets: List<Charset>) {
     EN(listOf(charset("GBK"), charset("UTF-16LE"))) {
 
         private val command =
-            """cmd /c rg "(?-u:[\w,.?:;'/\(\)\-\"\\ ]){3,}" -a -o --encoding %s %s"""
+            """rg "(?-u:[\w,.?:;'/\(\)\-\"\\ ]){3,}" -a -o --encoding %s %s"""
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(command.format(charset, path))
@@ -56,7 +56,7 @@ enum class Extractor(val charsets: List<Charset>) {
     ZH(listOf(charset("GBK"), charset("UTF-16LE"), charset("UTF-8"), charset("BIG5"))) {
 
         private val command =
-            """cmd /c rg "([\w.，、。？：；（） ]*)[\p{han}]{2,}([\w.，、。？：；（） ]*)" -a -o --encoding %s %s"""
+            """rg "([\w.，、。？：；（） ]*)[\p{han}]{2,}([\w.，、。？：；（） ]*)" -a -o --encoding %s %s"""
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(command.format(charset, path))
@@ -84,7 +84,7 @@ enum class Extractor(val charsets: List<Charset>) {
     Date(listOf(charset("GBK"), charset("UTF-16LE"), charset("UTF-8"), charset("BIG5"))) {
 
         private val command =
-            """cmd /c rg -a -o -f %s --encoding %s %s"""
+            """rg -a -o -f %s --encoding %s %s"""
 
         private val rulesFile = writeTempFile(Dictionary.date)
 
@@ -97,7 +97,7 @@ enum class Extractor(val charsets: List<Charset>) {
     Domain(listOf(charset("GBK"), charset("UTF-16LE"), charset("UTF-8"), charset("BIG5"))) {
 
         private val command =
-            """cmd /c rg -a -o -f %s --encoding %s %s"""
+            """rg -a -o -f %s --encoding %s %s"""
 
         private val rulesFile = writeTempFile(Dictionary.domain)
 

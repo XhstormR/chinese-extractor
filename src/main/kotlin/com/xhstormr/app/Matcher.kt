@@ -10,7 +10,7 @@ object Matcher {
         """(?-u:%s)"""
 
     private const val COMMAND =
-        """cmd /c rg --json -U -f %s %s"""
+        """rg --json -U -f %s %s"""
 
     private val decoder = Base64.getDecoder()
 
