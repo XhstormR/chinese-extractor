@@ -35,9 +35,9 @@ enum class Extractor(val charsets: List<Charset>) {
                             when {
                                 Dictionary.local_trie.matches(this) -> TextType.Local
                                 Dictionary.website_trie.matches(this) -> TextType.Website
+                                Dictionary.malicious_trie.matches(this) -> TextType.Malicious
                                 Dictionary.malware_trie.matches(this) -> TextType.Malware
                                 Dictionary.software_trie.matches(this) -> TextType.Software
-                                Dictionary.malicious_trie.matches(this) -> TextType.Malicious
                                 Dictionary.antivirus_trie.matches(this) -> TextType.Antivirus
                                 Dictionary.vul_number_trie.matches(this) -> TextType.VulNumber
                                 Dictionary.pinyin_word_trie.matches(this) -> TextType.PinyinWord

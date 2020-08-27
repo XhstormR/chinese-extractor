@@ -1,5 +1,5 @@
 .bat
-.com
+.dll
 .exe
 .msc
 .ps1
@@ -47,6 +47,8 @@ ifconfig
 infdefaultinstall
 ipconfig
 iptables
+kerberos
+lsadump
 lsass
 magnify
 mavinject
@@ -91,9 +93,49 @@ regedit
 regsvr32
 rundll32
 sc
+sc EnumDepend
+sc GetDisplayName
+sc GetKeyName
+sc Lock
+sc QueryLock
+sc boot
+sc config
+sc continue
+sc control
+sc create
+sc delete
+sc description
+sc failure
+sc failureflag
+sc interrogate
+sc managedaccount
+sc pause
+sc preferrednode
+sc privs
+sc qc
+sc qdescription
+sc qfailure
+sc qfailureflag
+sc qmanagedaccount
+sc qpreferrednode
+sc qprivs
+sc qprotection
+sc qsidtype
+sc qtriggerinfo
+sc query
+sc queryex
+sc quserservice
+sc sdset
+sc sdshow
+sc showsid
+sc sidtype
+sc start
+sc stop
+sc triggerinfo
 schtasks
 sdbinst
 sdclt
+sekurlsa
 services
 set
 setenforce

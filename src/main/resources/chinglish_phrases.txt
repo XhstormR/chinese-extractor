@@ -5,13 +5,24 @@ be red-eyed
 big rain
 bird me
 bird you
+can not
 carefully slip
 dama
 day day up
+default is not
 die away
+disk a
+disk b
+disk c
+disk d
+disk e
+disk f
+disk g
 dry mother
 egg water lake
+exception catched
 exciting car
+fail to
 five flowers eight doors
 give you some color
 go past no mistake past
@@ -27,6 +38,7 @@ hot water
 i give you face
 i turn face
 infamous actor
+key is the key
 know is know
 laugh what laugh
 lazy car
@@ -35,9 +47,13 @@ lose face
 love who who
 no can do
 no can no bb
+no disk
 no do no die
+no done
+no exist
 no know is no know
 no money no talk
+no respon
 no see no go
 no see you go
 no three no four
@@ -62,12 +78,14 @@ social flower
 sun out
 together up
 tuhao
+type command disable
 un-ding-able
 warm prompt
 watch sister
 we two who and who
 where cold where stay
 where cool where you stay
+writed by
 you are too two
 you can you up
 you have seed
