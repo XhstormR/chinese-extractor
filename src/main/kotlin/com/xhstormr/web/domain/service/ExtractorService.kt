@@ -12,10 +12,10 @@ class ExtractorService(
 
     companion object {
         private const val TEXT_COMMAND =
-            """cmd /c java -jar %s --path %s --type %s"""
+            """java -jar %s --path %s --type %s"""
 
         private const val DIEC_COMMAND =
-            """cmd /c %s -deepscan:yes -fullscan:yes -showjson:yes %s"""
+            """%s -d -j %s"""
     }
 
     fun extractText(args: ExtractorArgs) =
