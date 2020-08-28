@@ -2,22 +2,25 @@ package com.xhstormr.app
 
 import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie
 import com.hankcs.hanlp.HanLP
+import java.io.InputStream
+import java.io.SequenceInputStream
+import java.util.Collections
 
 object Dictionary {
 
-    val domain = getSystemResourceAsStream(TextType.Domain.lexicon)
+    val domain = getDictStream(TextType.Domain.lexicon)
         .bufferedReader()
         .use { it.readText() }
 
-    val date = getSystemResourceAsStream(TextType.Date.lexicon)
+    val date = getDictStream(TextType.Date.lexicon)
         .bufferedReader()
         .use { it.readText() }
 
-    val characters_s = getSystemResourceAsStream(TextType.Characters.lexicon)
+    val characters_s = getDictStream(TextType.Characters.lexicon)
         .bufferedReader()
         .use { it.readText() }
 
-    val words_s = getSystemResourceAsStream(TextType.Words.lexicon)
+    val words_s = getDictStream(TextType.Words.lexicon)
         .bufferedReader()
         .readLines()
         .toSet()
@@ -50,7 +53,7 @@ object Dictionary {
 
     val chinglish_phrases_trie by lazy { buildDictTrie(TextType.ChinglishPhrases.lexicon) }
 
-    private fun buildDictTrie(name: String) = getSystemResourceAsStream(name)
+    private fun buildDictTrie(name: String) = getDictStream(name)
         .bufferedReader()
         .readLines()
         .run { buildDictTrie(this) }
@@ -60,4 +63,10 @@ object Dictionary {
         .toSet()
         .associateBy { it }
         .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+
+    private fun getDictStream(pathname: String): InputStream {
+        val stream1 = getFileInputStream(pathname)
+        val stream2 = getSystemResourceAsStream(pathname)
+        return stream1?.let { SequenceInputStream(Collections.enumeration(listOf(stream1, stream2))) } ?: stream2
+    }
 }

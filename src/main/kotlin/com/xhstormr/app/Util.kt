@@ -1,6 +1,7 @@
 package com.xhstormr.app
 
 import com.squareup.moshi.Moshi
+import java.io.File
 import java.io.InputStream
 import java.nio.charset.Charset
 import java.nio.file.Files
@@ -11,6 +12,9 @@ fun getSystemResource(name: String): Path =
 
 fun getSystemResourceAsStream(name: String): InputStream =
     ClassLoader.getSystemResourceAsStream(name)!!
+
+fun getFileInputStream(pathname: String) =
+    File(pathname).takeIf { it.exists() }?.inputStream()
 
 fun writeTempFile(text: String) = createTempFile()
     .apply { deleteOnExit() }
