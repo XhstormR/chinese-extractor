@@ -3,9 +3,11 @@ package com.xhstormr.app
 import com.squareup.moshi.Moshi
 import java.io.File
 import java.io.InputStream
+import java.io.SequenceInputStream
 import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
+import java.util.Collections
 
 fun getSystemResource(name: String): Path =
     Path.of(ClassLoader.getSystemResource(name).toURI())
@@ -34,6 +36,9 @@ fun String.toHexString(charset: Charset) = this.toByteArray(charset)
     .joinToString("""\x""", """\x""") { "%02x".format(it) }
 
 inline fun <reified T> clazz() = T::class.java
+
+operator fun InputStream.plus(inputStream: InputStream) =
+    SequenceInputStream(Collections.enumeration(listOf(this, inputStream)))
 
 val moshi: Moshi = Moshi.Builder()
     .add(CharsetAdapter)

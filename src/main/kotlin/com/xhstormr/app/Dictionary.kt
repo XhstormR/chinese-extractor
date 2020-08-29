@@ -3,8 +3,6 @@ package com.xhstormr.app
 import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie
 import com.hankcs.hanlp.HanLP
 import java.io.InputStream
-import java.io.SequenceInputStream
-import java.util.Collections
 
 object Dictionary {
 
@@ -67,6 +65,6 @@ object Dictionary {
     private fun getDictStream(pathname: String): InputStream {
         val stream1 = getFileInputStream(pathname)
         val stream2 = getSystemResourceAsStream(pathname)
-        return stream1?.let { SequenceInputStream(Collections.enumeration(listOf(stream1, stream2))) } ?: stream2
+        return stream1?.let { stream1 + stream2 } ?: stream2
     }
 }
