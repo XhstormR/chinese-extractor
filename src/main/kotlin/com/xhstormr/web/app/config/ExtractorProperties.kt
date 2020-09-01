@@ -10,7 +10,7 @@ import java.nio.file.Path
  */
 @ConstructorBinding
 @ConfigurationProperties("extractor")
-class ExtractorProperties(
+data class ExtractorProperties(
     val textBin: Path,
     val diecBin: Path
 )
