@@ -12,8 +12,9 @@ inline fun getLogger(): Logger = LoggerFactory.getLogger(MethodHandles.lookup().
 
 inline fun <reified T> clazz() = T::class.java
 
-fun readProcessOutput(command: String) = Runtime.getRuntime()
-    .exec(command)
+fun readProcessOutput(command: String) = ProcessBuilder(command.split(" "))
+    .redirectErrorStream(true)
+    .start()
     .inputStream
     .bufferedReader(if (isWindows()) charset("GBK") else Charsets.UTF_8)
     .use { it.readText() }
