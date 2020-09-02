@@ -23,10 +23,12 @@ enum class Extractor(val charsets: List<Charset>) {
     EN(listOf(charset("GBK"), charset("UTF-16LE"))) {
 
         private val command =
-            """rg "(?-u:[\w,.?:;'/\(\)\-\"\\ ]){3,}" -a -o --encoding %s %s"""
+            """rg -a -o -f %s --encoding %s %s"""
+
+        private val rulesFile = writeTempFile("""(?-u:[\w,.?:;'"/\(\)\-\\ ]){3,}""")
 
         override fun extract(path: String) = charsets.associateWith { charset ->
-            readProcessOutput(command.format(charset, path))
+            readProcessOutput(command.format(rulesFile, charset, path))
                 .parallelStream()
                 // 至少包含一个词组
                 .collect(
@@ -56,10 +58,12 @@ enum class Extractor(val charsets: List<Charset>) {
     ZH(listOf(charset("GBK"), charset("UTF-16LE"), charset("UTF-8"), charset("BIG5"))) {
 
         private val command =
-            """rg "([\w.，、。？：；（） ]*)[\p{han}]{2,}([\w.，、。？：；（） ]*)" -a -o --encoding %s %s"""
+            """rg -a -o -f %s --encoding %s %s"""
+
+        private val rulesFile = writeTempFile("""([\w.，、。？：；（） ]*)[\p{han}]{2,}([\w.，、。？：；（） ]*)""")
 
         override fun extract(path: String) = charsets.associateWith { charset ->
-            readProcessOutput(command.format(charset, path))
+            readProcessOutput(command.format(rulesFile, charset, path))
                 .parallelStream()
                 // 只包含常用汉字
                 .filter { str -> str.filter { TextUtility.isChinese(it) }.all { Dictionary.characters.contains(it) } }

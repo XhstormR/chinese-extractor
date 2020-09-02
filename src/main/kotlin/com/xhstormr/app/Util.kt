@@ -26,8 +26,9 @@ fun writeTempFile(texts: Collection<String>) = createTempFile()
     .apply { deleteOnExit() }
     .apply { Files.write(toPath(), texts) }
 
-fun readProcessOutput(command: String) = Runtime.getRuntime()
-    .exec(command)
+fun readProcessOutput(command: String) = ProcessBuilder(command.split(" "))
+    .redirectErrorStream(true)
+    .start()
     .inputStream
     .bufferedReader()
     .useLines { it.toSet() }
