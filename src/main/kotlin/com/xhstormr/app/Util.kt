@@ -9,6 +9,9 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.Collections
 
+fun getCurrentJar() =
+    File(clazz<App>().protectionDomain.codeSource.location.toURI())
+
 fun getSystemResource(name: String): Path =
     Path.of(ClassLoader.getSystemResource(name).toURI())
 
@@ -16,7 +19,10 @@ fun getSystemResourceAsStream(name: String): InputStream =
     ClassLoader.getSystemResourceAsStream(name)!!
 
 fun getFileInputStream(pathname: String) =
-    File(pathname).takeIf { it.exists() }?.inputStream()
+    getFileInputStream(File(pathname))
+
+fun getFileInputStream(file: File) =
+    file.takeIf { it.exists() }?.inputStream()
 
 fun writeTempFile(text: String) = createTempFile()
     .apply { deleteOnExit() }

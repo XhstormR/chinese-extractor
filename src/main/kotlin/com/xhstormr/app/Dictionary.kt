@@ -63,7 +63,7 @@ object Dictionary {
         .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
 
     private fun getDictStream(pathname: String): InputStream {
-        val stream1 = getFileInputStream(pathname)
+        val stream1 = getFileInputStream(getCurrentJar().resolveSibling("lexicon").resolve(pathname))
         val stream2 = getSystemResourceAsStream(pathname)
         return stream1?.let { stream1 + stream2 } ?: stream2
     }
