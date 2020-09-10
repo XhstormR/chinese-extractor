@@ -12,10 +12,10 @@ buildscript {
 plugins {
     idea
     application
-    val kotlinVersion = "1.4.0"
+    val kotlinVersion = "1.4.10"
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
-    id("org.jlleitschuh.gradle.ktlint") version "9.3.0"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.0"
 }
 
 application {
@@ -82,7 +82,7 @@ tasks {
 
     withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "12"
+            jvmTarget = "14"
             freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
         }
     }
@@ -91,8 +91,8 @@ tasks {
         options.encoding = Charsets.UTF_8.name()
         options.isFork = true
         options.isIncremental = true
-        sourceCompatibility = JavaVersion.VERSION_12.toString()
-        targetCompatibility = JavaVersion.VERSION_12.toString()
+        sourceCompatibility = JavaVersion.VERSION_14.toString()
+        targetCompatibility = JavaVersion.VERSION_14.toString()
     }
 
     proguard.dependsOn(jar)
