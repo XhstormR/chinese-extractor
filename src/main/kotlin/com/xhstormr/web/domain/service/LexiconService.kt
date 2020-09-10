@@ -17,5 +17,5 @@ class LexiconService(
             ?.run { readText() }
 
     fun saveContent(textType: TextType, content: String) =
-        lexiconDir.resolve(textType.lexicon).writeText(content)
+        lexiconDir.resolve(textType.lexicon).writeText(content + System.lineSeparator())
 }

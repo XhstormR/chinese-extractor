@@ -31,8 +31,8 @@ spring:
       WRITE_DATES_AS_TIMESTAMPS: true
   servlet:
     multipart:
-      max-file-size: 50MB
-      max-request-size: 55MB
+      max-file-size: 100MB
+      max-request-size: 105MB
 
 logging:
   file:

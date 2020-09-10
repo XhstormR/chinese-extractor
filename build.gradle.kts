@@ -6,13 +6,13 @@ version = "1.0-SNAPSHOT"
 plugins {
     idea
     application
-    val kotlinVersion = "1.4.0"
+    val kotlinVersion = "1.4.10"
     kotlin("jvm") version kotlinVersion
     kotlin("kapt") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "2.3.3.RELEASE"
-    id("org.jlleitschuh.gradle.ktlint") version "9.3.0"
+    id("org.springframework.boot") version "2.3.4.RELEASE"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.0"
 }
 
 apply {
@@ -33,7 +33,6 @@ repositories {
 }
 
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
     runtimeOnly(kotlin("reflect"))
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
@@ -57,7 +56,7 @@ tasks {
 
     withType<KotlinCompile> {
         kotlinOptions {
-            jvmTarget = "12"
+            jvmTarget = "14"
             freeCompilerArgs = listOf("-Xjsr305=strict", "-Xjvm-default=enable")
         }
     }
@@ -66,8 +65,8 @@ tasks {
         options.encoding = Charsets.UTF_8.name()
         options.isFork = true
         options.isIncremental = true
-        sourceCompatibility = JavaVersion.VERSION_12.toString()
-        targetCompatibility = JavaVersion.VERSION_12.toString()
+        sourceCompatibility = JavaVersion.VERSION_14.toString()
+        targetCompatibility = JavaVersion.VERSION_14.toString()
     }
 }
 
