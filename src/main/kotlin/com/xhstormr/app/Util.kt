@@ -39,7 +39,8 @@ fun readProcessOutput(command: String) = ProcessBuilder(command.split(" "))
     .bufferedReader()
     .useLines { it.toSet() }
 
-fun String.toHexString(charset: Charset) = this.toByteArray(charset)
+fun String.toHexString(charset: Charset) = this
+    .toByteArray(charset)
     .joinToString("""\x""", """\x""") { "%02x".format(it) }
 
 inline fun <reified T> clazz() = T::class.java

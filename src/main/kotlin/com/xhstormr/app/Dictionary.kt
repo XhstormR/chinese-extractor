@@ -31,7 +31,7 @@ object Dictionary {
 
     val cet_trie by lazy { buildDictTrie(TextType.CET.lexicon) }
 
-    val pinyin_word_trie by lazy { buildDictTrie(TextType.PinyinWord.lexicon) }
+    val pinyin_word_trie by lazy { buildDictTrie(TextType.PinyinWord.lexicon) { " $it " } }
 
     val vul_number_trie by lazy { buildDictTrie(TextType.VulNumber.lexicon) }
 
@@ -51,9 +51,10 @@ object Dictionary {
 
     val chinglish_phrases_trie by lazy { buildDictTrie(TextType.ChinglishPhrases.lexicon) }
 
-    private fun buildDictTrie(name: String) = getDictStream(name)
+    private fun buildDictTrie(name: String, transform: ((String) -> String)? = null) = getDictStream(name)
         .bufferedReader()
         .readLines()
+        .map { transform?.invoke(it) ?: it }
         .run { buildDictTrie(this) }
 
     private fun buildDictTrie(list: Collection<String>) = list
