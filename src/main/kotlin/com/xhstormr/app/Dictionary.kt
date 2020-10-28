@@ -31,11 +31,11 @@ object Dictionary {
 
     val cet_trie by lazy { buildDictTrie(TextType.CET.lexicon) }
 
-    val pinyin_word_trie by lazy { buildDictTrie(TextType.PinyinWord.lexicon) { " $it " } }
+    val pinyin_word_trie by lazy { buildDictTrie(TextType.PinyinWord.lexicon) }
 
     val vul_number_trie by lazy { buildDictTrie(TextType.VulNumber.lexicon) }
 
-    val malicious_trie by lazy { buildDictTrie(TextType.Malicious.lexicon) }
+    val malicious_trie by lazy { buildDictTrie(TextType.Malicious.lexicon) { "$it " } }
 
     val antivirus_trie by lazy { buildDictTrie(TextType.Antivirus.lexicon) }
 

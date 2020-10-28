@@ -19,7 +19,7 @@ plugins {
 }
 
 application {
-    mainClassName = "com.xhstormr.app.MainKt"
+    mainClass.set("com.xhstormr.app.MainKt")
 }
 
 repositories {
@@ -63,7 +63,7 @@ tasks {
     }
 
     withType<Jar> {
-        manifest.attributes["Main-Class"] = application.mainClassName
+        manifest.attributes["Main-Class"] = application.mainClass
         duplicatesStrategy = DuplicatesStrategy.EXCLUDE
         from(configurations.runtimeClasspath.get().map { zipTree(it) })
         exclude("**/*.kotlin_module")
@@ -72,7 +72,7 @@ tasks {
     }
 
     withType<Wrapper> {
-        gradleVersion = "6.6"
+        gradleVersion = "6.7"
         distributionType = Wrapper.DistributionType.ALL
     }
 
