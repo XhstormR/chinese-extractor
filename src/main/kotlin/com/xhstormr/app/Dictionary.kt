@@ -1,6 +1,5 @@
 package com.xhstormr.app
 
-import com.hankcs.algorithm.AhoCorasickDoubleArrayTrie
 import com.hankcs.hanlp.HanLP
 import java.io.InputStream
 
@@ -35,7 +34,7 @@ object Dictionary {
 
     val vul_number_trie by lazy { buildDictTrie(TextType.VulNumber.lexicon) }
 
-    val malicious_trie by lazy { buildDictTrie(TextType.Malicious.lexicon) { "$it " } }
+    val malicious_trie by lazy { buildDictTrie(TextType.Malicious.lexicon) }
 
     val antivirus_trie by lazy { buildDictTrie(TextType.Antivirus.lexicon) }
 
@@ -58,10 +57,9 @@ object Dictionary {
         .run { buildDictTrie(this) }
 
     private fun buildDictTrie(list: Collection<String>) = list
-        .map { it.toLowerCase() }
         .toSet()
         .associateBy { it }
-        .let { AhoCorasickDoubleArrayTrie<String>().apply { build(it) } }
+        .let { MyAhoCorasickDoubleArrayTrie(it, App.boundary, App.ignoreCase) }
 
     private fun getDictStream(pathname: String): InputStream {
         val stream1 = getFileInputStream(getCurrentJar().resolveSibling("lexicon").resolve(pathname))

@@ -1,6 +1,7 @@
 package com.xhstormr.app
 
 import com.github.ajalt.clikt.core.CliktCommand
+import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.enum
@@ -12,6 +13,10 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
     private val path by option().required()
 
     private val type by option().enum<Extractor>().required()
+
+    val boundary by option().flag()
+
+    val ignoreCase by option().flag()
 
     override fun run() {
         val parameterizedType =

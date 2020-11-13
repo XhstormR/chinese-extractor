@@ -30,21 +30,19 @@ enum class Extractor(val charsets: List<Charset>) {
                 // 至少包含一个词组
                 .collect(
                     Collectors.groupingByConcurrent { str ->
-                        with(str.toLowerCase()) {
-                            when {
-                                Dictionary.local_trie.matches(this) -> TextType.Local
-                                Dictionary.website_trie.matches(this) -> TextType.Website
-                                Dictionary.malicious_trie.matches(this) -> TextType.Malicious
-                                Dictionary.malware_trie.matches(this) -> TextType.Malware
-                                Dictionary.software_trie.matches(this) -> TextType.Software
-                                Dictionary.antivirus_trie.matches(this) -> TextType.Antivirus
-                                Dictionary.vul_number_trie.matches(this) -> TextType.VulNumber
-                                Dictionary.pinyin_word_trie.matches(this) -> TextType.PinyinWord
-                                Dictionary.chinglish_words_trie.matches(this) -> TextType.ChinglishWords
-                                Dictionary.chinglish_phrases_trie.matches(this) -> TextType.ChinglishPhrases
-                                Dictionary.cet_trie.matches(this) -> TextType.CET
-                                else -> TextType.None
-                            }
+                        when {
+                            Dictionary.local_trie.matches(str) -> TextType.Local
+                            Dictionary.website_trie.matches(str) -> TextType.Website
+                            Dictionary.malicious_trie.matches(str) -> TextType.Malicious
+                            Dictionary.malware_trie.matches(str) -> TextType.Malware
+                            Dictionary.software_trie.matches(str) -> TextType.Software
+                            Dictionary.antivirus_trie.matches(str) -> TextType.Antivirus
+                            Dictionary.vul_number_trie.matches(str) -> TextType.VulNumber
+                            Dictionary.pinyin_word_trie.matches(str) -> TextType.PinyinWord
+                            Dictionary.chinglish_words_trie.matches(str) -> TextType.ChinglishWords
+                            Dictionary.chinglish_phrases_trie.matches(str) -> TextType.ChinglishPhrases
+                            Dictionary.cet_trie.matches(str) -> TextType.CET
+                            else -> TextType.None
                         }
                     }
                 )

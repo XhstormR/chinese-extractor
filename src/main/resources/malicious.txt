@@ -54,8 +54,8 @@ magnify
 mavinject
 mimikatz
 mmc
-msf
 msfconsole
+msfvenom
 mshta
 msiexec
 mstsc
