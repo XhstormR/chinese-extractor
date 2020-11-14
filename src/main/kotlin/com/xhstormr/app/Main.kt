@@ -10,6 +10,12 @@ import java.nio.charset.Charset
 
 object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
+    private const val RULE_TEMPLATE =
+        """(%s:%s)"""
+
+    private const val BOUNDARY_TEMPLATE =
+        """\b%s\b"""
+
     private val path by option().required()
 
     private val type by option().enum<Extractor>().required()
@@ -27,6 +33,10 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
             .let { Matcher.match(MatchArgs(path, it)) }
             .let { println(jsonAdapter.toJson(it)) }
     }
+
+    fun regex(pattern: String) = pattern
+        .let { if (boundary) BOUNDARY_TEMPLATE.format(it) else it }
+        .let { if (ignoreCase) RULE_TEMPLATE.format("?i-u", it) else RULE_TEMPLATE.format("?-u", it) }
 }
 
 fun main(args: Array<String>) = App.main(args)

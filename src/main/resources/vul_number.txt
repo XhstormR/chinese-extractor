@@ -1,6 +1,0 @@
-CAN-
-CNCVE-
-CNNVD-
-CNVD-
-CVE-
-MS-

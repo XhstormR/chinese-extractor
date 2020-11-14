@@ -6,12 +6,6 @@ import kotlin.streams.toList
 
 object Matcher {
 
-    private const val RULE_TEMPLATE =
-        """(%s:%s)"""
-
-    private const val BOUNDARY_TEMPLATE =
-        """\b%s\b"""
-
     private const val COMMAND =
         """rg --json -U -f %s %s"""
 
@@ -26,7 +20,7 @@ object Matcher {
                     // longest match first
                     .sortedByDescending { it.length }
                     .map { it.toHexString(charset) }
-                    .map { template(it) }
+                    .map { App.regex(it) }
                     .chunked(5000)
                     .parallelStream()
                     .map { writeTempFile(it) }
@@ -47,8 +41,4 @@ object Matcher {
                     }.toList()
             }
         }
-
-    private fun template(text: String) = text
-        .let { if (App.boundary) BOUNDARY_TEMPLATE.format(it) else it }
-        .let { if (App.ignoreCase) RULE_TEMPLATE.format("?i-u", it) else RULE_TEMPLATE.format("?-u", it) }
 }

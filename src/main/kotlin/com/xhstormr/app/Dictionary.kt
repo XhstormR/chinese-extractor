@@ -22,6 +22,12 @@ object Dictionary {
         .readLines()
         .toSet()
 
+    val vul_id = getDictStream(TextType.VulId.lexicon)
+        .bufferedReader()
+        .readLines()
+        .map { App.regex(it) }
+        .toSet()
+
     val characters = (characters_s + HanLP.s2t(characters_s)).toSet()
 
     val words = words_s + words_s.map { HanLP.s2t(it) }
@@ -31,8 +37,6 @@ object Dictionary {
     val cet_trie by lazy { buildDictTrie(TextType.CET.lexicon) }
 
     val pinyin_word_trie by lazy { buildDictTrie(TextType.PinyinWord.lexicon) }
-
-    val vul_number_trie by lazy { buildDictTrie(TextType.VulNumber.lexicon) }
 
     val malicious_trie by lazy { buildDictTrie(TextType.Malicious.lexicon) }
 

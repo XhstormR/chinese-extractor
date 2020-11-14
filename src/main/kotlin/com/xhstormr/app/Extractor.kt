@@ -37,7 +37,6 @@ enum class Extractor(val charsets: List<Charset>) {
                             Dictionary.malware_trie.matches(str) -> TextType.Malware
                             Dictionary.software_trie.matches(str) -> TextType.Software
                             Dictionary.antivirus_trie.matches(str) -> TextType.Antivirus
-                            Dictionary.vul_number_trie.matches(str) -> TextType.VulNumber
                             Dictionary.pinyin_word_trie.matches(str) -> TextType.PinyinWord
                             Dictionary.chinglish_words_trie.matches(str) -> TextType.ChinglishWords
                             Dictionary.chinglish_phrases_trie.matches(str) -> TextType.ChinglishPhrases
@@ -77,9 +76,19 @@ enum class Extractor(val charsets: List<Charset>) {
         }
     },
 
+    VulId(listOf(charset("GBK"), charset("UTF-16LE"))) {
+
+        private val rulesFile by lazy { writeTempFile(Dictionary.vul_id) }
+
+        override fun extract(path: String) = charsets.associateWith { charset ->
+            readProcessOutput(COMMAND.format(rulesFile, charset, path))
+                .run { mapOf(TextType.VulId to this) }
+        }
+    },
+
     Date(listOf(charset("GBK"), charset("UTF-16LE"), charset("UTF-8"), charset("BIG5"))) {
 
-        private val rulesFile = writeTempFile(Dictionary.date)
+        private val rulesFile by lazy { writeTempFile(Dictionary.date) }
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(COMMAND.format(rulesFile, charset, path))
@@ -89,7 +98,7 @@ enum class Extractor(val charsets: List<Charset>) {
 
     Domain(listOf(charset("GBK"), charset("UTF-16LE"), charset("UTF-8"), charset("BIG5"))) {
 
-        private val rulesFile = writeTempFile(Dictionary.domain)
+        private val rulesFile by lazy { writeTempFile(Dictionary.domain) }
 
         override fun extract(path: String) = charsets.associateWith { charset ->
             readProcessOutput(COMMAND.format(rulesFile, charset, path))

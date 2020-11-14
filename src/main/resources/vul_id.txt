@@ -1,0 +1,5 @@
+CNCVE-\d{8}
+CNNVD-\d{6}-\d{3}
+CNVD-\d{4}-\d{4,}
+CVE-\d{4}-\d{4,}
+MS\d{2}-\d{3}
