@@ -1,5 +1,6 @@
 package com.xhstormr.app
 
+import kotlinx.serialization.decodeFromString
 import org.json.JSONObject
 import java.util.Base64
 import kotlin.streams.toList
@@ -10,8 +11,6 @@ object Matcher {
         """rg --json -U -f %s %s"""
 
     private val decoder = Base64.getDecoder()
-
-    private val jsonAdapter = moshi.adapter(clazz<Message>())
 
     fun match(args: MatchArgs) = args.data
         .mapValues { (charset, patterns) ->
@@ -27,7 +26,7 @@ object Matcher {
                     .flatMap { rulesFile ->
                         readProcessOutput(COMMAND.format(rulesFile, args.path))
                             .filter { JSONObject(it).getString("type") == "match" }
-                            .mapNotNull { jsonAdapter.fromJson(it) }
+                            .map { json.decodeFromString<Message>(it) }
                             .map { it.data }
                             .flatMap { data ->
                                 data.submatches.map {

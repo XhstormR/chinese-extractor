@@ -5,8 +5,7 @@ import com.github.ajalt.clikt.parameters.options.flag
 import com.github.ajalt.clikt.parameters.options.option
 import com.github.ajalt.clikt.parameters.options.required
 import com.github.ajalt.clikt.parameters.types.enum
-import com.squareup.moshi.Types
-import java.nio.charset.Charset
+import kotlinx.serialization.encodeToString
 
 object App : CliktCommand(printHelpOnEmptyArgs = true) {
 
@@ -25,13 +24,9 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
     val ignoreCase by option().flag()
 
     override fun run() {
-        val parameterizedType =
-            Types.newParameterizedType(clazz<Map<*, *>>(), clazz<Charset>(), clazz<Map<*, *>>(), clazz<TextType>(), clazz<List<*>>(), clazz<Sample>())
-        val jsonAdapter = moshi.adapter<Map<Charset, Map<TextType, List<Sample>>>>(parameterizedType)
-
         type.extract(path)
             .let { Matcher.match(MatchArgs(path, it)) }
-            .let { println(jsonAdapter.toJson(it)) }
+            .let { println(json.encodeToString(it)) }
     }
 
     fun regex(pattern: String) = pattern

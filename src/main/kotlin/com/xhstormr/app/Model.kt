@@ -1,52 +1,52 @@
 package com.xhstormr.app
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Message(
     val type: String,
     val data: Data
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Data(
     val path: Path,
     val lines: Lines,
-    @field:Json(name = "line_number")
+    @SerialName("line_number")
     val lineNumber: Long,
-    @field:Json(name = "absolute_offset")
+    @SerialName("absolute_offset")
     val absoluteOffset: Long,
     val submatches: List<Submatch>
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Path(
     val text: String
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Lines(
-    val bytes: String?,
-    val text: String?
+    val bytes: String? = null,
+    val text: String? = null
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Submatch(
     val match: Match,
     val start: Long,
     val end: Long
 )
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Match(
-    val bytes: String?,
-    val text: String?
+    val bytes: String? = null,
+    val text: String? = null
 )
 
 //
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class Sample(
     val text: String,
     val offset: Long,

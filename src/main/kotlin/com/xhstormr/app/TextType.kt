@@ -1,8 +1,5 @@
 package com.xhstormr.app
 
-import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = false)
 enum class TextType(val lexicon: String) {
     Antivirus("antivirus.txt"),
     CET("cet.txt"),

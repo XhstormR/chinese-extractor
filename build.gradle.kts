@@ -14,7 +14,7 @@ plugins {
     application
     val kotlinVersion = "1.4.10"
     kotlin("jvm") version kotlinVersion
-    kotlin("kapt") version kotlinVersion
+    kotlin("plugin.serialization") version kotlinVersion
     id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
 }
 
@@ -31,8 +31,7 @@ dependencies {
 
     implementation("com.github.ajalt:clikt:+")
 
-    implementation("com.squareup.moshi:moshi:+")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:+")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:+")
 
     implementation("org.json:json:+")
 

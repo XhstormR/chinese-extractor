@@ -1,6 +1,8 @@
 package com.xhstormr.app
 
-import com.squareup.moshi.Moshi
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.contextual
 import java.io.File
 import java.io.InputStream
 import java.io.SequenceInputStream
@@ -48,6 +50,6 @@ inline fun <reified T> clazz() = T::class.java
 operator fun InputStream.plus(inputStream: InputStream) =
     SequenceInputStream(Collections.enumeration(listOf(this, inputStream)))
 
-val moshi: Moshi = Moshi.Builder()
-    .add(CharsetAdapter)
-    .build()
+val json = Json {
+    serializersModule = SerializersModule { contextual(CharsetSerializer) }
+}
