@@ -11,8 +11,8 @@ plugins {
     kotlin("kapt") version kotlinVersion
     kotlin("plugin.jpa") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "2.3.4.RELEASE"
-    id("org.jlleitschuh.gradle.ktlint") version "9.4.0"
+    id("org.springframework.boot") version "2.4.0"
+    id("org.jlleitschuh.gradle.ktlint") version "9.4.1"
 }
 
 apply {
@@ -21,7 +21,7 @@ apply {
 
 application {
     applicationName = project.name
-    mainClassName = "com.xhstormr.web.ApplicationKt"
+    mainClass.set("com.xhstormr.web.ApplicationKt")
 }
 
 kapt {
@@ -38,7 +38,9 @@ dependencies {
 
     /**/
 
-    implementation("io.springfox:springfox-boot-starter:+")
+    implementation("org.springdoc:springdoc-openapi-ui:+")
+    implementation("org.springdoc:springdoc-openapi-kotlin:+")
+    implementation("org.springdoc:springdoc-openapi-hateoas:+")
 
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
@@ -46,7 +48,7 @@ dependencies {
 
 tasks {
     withType<Wrapper> {
-        gradleVersion = "6.6"
+        gradleVersion = "6.7"
         distributionType = Wrapper.DistributionType.ALL
     }
 

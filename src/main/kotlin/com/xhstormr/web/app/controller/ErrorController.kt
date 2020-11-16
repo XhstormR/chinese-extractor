@@ -1,19 +1,19 @@
 package com.xhstormr.web.app.controller
 
+import io.swagger.v3.oas.annotations.Hidden
 import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController
 import org.springframework.boot.web.error.ErrorAttributeOptions
 import org.springframework.boot.web.servlet.error.ErrorAttributes
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
-import springfox.documentation.annotations.ApiIgnore
 import javax.servlet.http.HttpServletRequest
 
 /**
  * @author zhangzf
  * @create 2018/12/27 22:15
  */
-@ApiIgnore
+@Hidden
 @RestController
 class ErrorController(errorAttributes: ErrorAttributes) : AbstractErrorController(errorAttributes) {
 

@@ -19,7 +19,10 @@ class ExtractorService(
     }
 
     fun extractText(args: ExtractorArgs) =
-        readProcessOutput(TEXT_COMMAND.format(extractorProperties.textBin, args.path, args.type))
+        TEXT_COMMAND.format(extractorProperties.textBin, args.path, args.type)
+            .let { if (args.boundary) "$it --boundary" else it }
+            .let { if (args.ignoreCase) "$it --ignore-case" else it }
+            .let { readProcessOutput(it) }
 
     fun extractType(path: String) =
         readProcessOutput(DIEC_COMMAND.format(extractorProperties.diecBin, path))

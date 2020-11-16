@@ -13,7 +13,7 @@ enum class TextType(val lexicon: String) {
     Malware("malware.txt"),
     PinyinWord("pinyin_word.txt"),
     Software("software.txt"),
-    VulNumber("vul_number.txt"),
+    VulId("vul_id.txt"),
     Website("website.txt"),
     Words("words_s.txt"),
     None("");

@@ -1,23 +1,22 @@
 package com.xhstormr.web.domain.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
-import io.swagger.annotations.ApiModel
-import io.swagger.annotations.ApiModelProperty
+import io.swagger.v3.oas.annotations.media.Schema
 import java.time.Instant
 
-@ApiModel("请求响应体")
+@Schema(name = "请求响应体")
 data class RestResponse<T>(
-    @field:ApiModelProperty("响应数据")
+    @field:Schema(description = "响应数据")
     var payload: T? = null,
-    @field:ApiModelProperty("请求成功")
+    @field:Schema(description = "请求成功")
     var success: Boolean = false,
-    @field:ApiModelProperty("错误信息")
+    @field:Schema(description = "错误信息")
     var msg: String? = null,
     @JsonIgnore
-    @field:ApiModelProperty("状态码")
+    @field:Schema(description = "状态码")
     var code: Int = 0,
     @JsonIgnore
-    @field:ApiModelProperty("响应时间")
+    @field:Schema(description = "响应时间")
     val timestamp: Long = Instant.now().epochSecond
 ) {
     fun peek(runnable: Runnable): RestResponse<T> {
