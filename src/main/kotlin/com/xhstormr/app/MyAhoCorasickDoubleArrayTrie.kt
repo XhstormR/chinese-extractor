@@ -21,8 +21,8 @@ class MyAhoCorasickDoubleArrayTrie(
             text,
             IHitCancellable { begin, end, _ ->
                 var isWord = true
-                if (boundary && begin != 0 && text[begin - 1] != ' ') isWord = false
-                if (boundary && end != text.length && text[end] != ' ') isWord = false
+                if (boundary && begin != 0 && !text[begin - 1].isBoundary()) isWord = false
+                if (boundary && end != text.length && !text[end].isBoundary()) isWord = false
 
                 if (!boundary || isWord) {
                     isMatched = true

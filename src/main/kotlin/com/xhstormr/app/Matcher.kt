@@ -16,11 +16,16 @@ object Matcher {
         .mapValues { (charset, patterns) ->
             patterns.mapValues { (_, data) ->
                 data
+                    .asSequence()
+                    .map { it.trim(Char::isBoundary) }
+                    .distinct()
+                    .filter { it.isNotBlank() }
                     // longest match first
                     .sortedByDescending { it.length }
                     .map { it.toHexString(charset) }
                     .map { App.regex(it) }
                     .chunked(5000)
+                    .toList()
                     .parallelStream()
                     .map { writeTempFile(it) }
                     .flatMap { rulesFile ->

@@ -10,6 +10,7 @@ import java.nio.charset.Charset
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.Collections
+import java.util.regex.Pattern
 
 fun getCurrentJar() =
     File(clazz<App>().protectionDomain.codeSource.location.toURI())
@@ -43,7 +44,11 @@ fun readProcessOutput(command: String) = ProcessBuilder(command.split(" "))
 
 fun String.toHexString(charset: Charset) = this
     .toByteArray(charset)
-    .joinToString("""\x""", """\x""") { "%02x".format(it) }
+    .joinToString("") { """\x%02x""".format(it) }
+
+private val BOUNDARY_PREDICATE = Pattern.compile("""\W""").asMatchPredicate()
+
+fun Char.isBoundary() = BOUNDARY_PREDICATE.test(this.toString())
 
 inline fun <reified T> clazz() = T::class.java
 
