@@ -20,6 +20,7 @@ object Matcher {
                     .map { it.trim(Char::isBoundary) }
                     .distinct()
                     .filter { it.isNotBlank() }
+                    .filter { it.length > 1 }
                     // longest match first
                     .sortedByDescending { it.length }
                     .map { it.toHexString(charset) }

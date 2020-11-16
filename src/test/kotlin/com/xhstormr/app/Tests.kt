@@ -91,4 +91,16 @@ class Tests {
         Assertions.assertFalse(trie.matches("""WORLD"""))
         Assertions.assertFalse(trie.matches("""world"""))
     }
+
+    @Test
+    fun charTest() {
+        Assertions.assertTrue('中'.isChinese())
+        Assertions.assertFalse('A'.isChinese())
+
+        Assertions.assertTrue(' '.isBoundary())
+        Assertions.assertTrue(','.isBoundary())
+        Assertions.assertTrue('"'.isBoundary())
+        Assertions.assertFalse('A'.isBoundary())
+        Assertions.assertFalse('中'.isBoundary())
+    }
 }

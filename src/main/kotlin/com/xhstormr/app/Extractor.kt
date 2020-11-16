@@ -1,6 +1,5 @@
 package com.xhstormr.app
 
-import com.hankcs.hanlp.utility.TextUtility
 import java.nio.charset.Charset
 import java.util.stream.Collectors
 
@@ -57,7 +56,7 @@ enum class Extractor(val charsets: List<Charset>) {
             readProcessOutput(COMMAND.format(rulesFile, charset, path))
                 .parallelStream()
                 // 只包含常用汉字
-                .filter { str -> str.filter { TextUtility.isChinese(it) }.all { Dictionary.characters.contains(it) } }
+                .filter { str -> str.filter { it.isChinese() }.all { Dictionary.characters.contains(it) } }
                 // 至少包含一个词组
                 .collect(
                     Collectors.groupingByConcurrent { str ->
