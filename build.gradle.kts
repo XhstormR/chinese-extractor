@@ -29,7 +29,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("com.github.ajalt:clikt:+")
+    implementation("com.github.ajalt.clikt:clikt:+")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:+")
 

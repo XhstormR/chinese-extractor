@@ -30,8 +30,8 @@ object App : CliktCommand(printHelpOnEmptyArgs = true) {
     }
 
     fun regex(pattern: String) = pattern
-        .let { if (boundary) BOUNDARY_TEMPLATE.format(it) else it }
         .let { if (ignoreCase) RULE_TEMPLATE.format("?i-u", it) else RULE_TEMPLATE.format("?-u", it) }
+        .let { if (boundary) BOUNDARY_TEMPLATE.format(it) else it }
 }
 
 fun main(args: Array<String>) = App.main(args)
