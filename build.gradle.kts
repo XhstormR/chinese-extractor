@@ -42,8 +42,13 @@ dependencies {
     implementation("org.springdoc:springdoc-openapi-kotlin:+")
     implementation("org.springdoc:springdoc-openapi-hateoas:+")
 
+    implementation("org.springframework.data:spring-data-commons")
+    // TODO: https://github.com/spring-projects/spring-hateoas/issues/1396
+    implementation("org.springframework.hateoas:spring-hateoas:1.1.1.RELEASE")
+
     kapt("org.springframework.boot:spring-boot-configuration-processor")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
+    implementation("org.springframework.boot:spring-boot-starter-validation")
 }
 
 tasks {
