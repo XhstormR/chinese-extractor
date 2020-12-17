@@ -16,5 +16,5 @@ enum class TextType(val lexicon: String) {
     VulId("vul_id.txt"),
     Website("website.txt"),
     Words("words_s.txt"),
-    None("");
+    None("none.txt");
 }
